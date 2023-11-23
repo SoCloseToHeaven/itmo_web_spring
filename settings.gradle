@@ -1,0 +1,3 @@
+rootProject.name = "itmo_web_spring"
+
+include("eureka-server")
