@@ -1,3 +1,8 @@
 rootProject.name = "itmo_web_spring"
 
-include("eureka-server", "points-service", "auth-service")
+include(
+        "eureka-server",
+        "points-service",
+        "auth-service",
+        "api-gateway"
+)
