@@ -12,5 +12,5 @@ class HitChecker : Area {
         Triangle()
     )
 
-    override fun checkHit(x: Long, y: Long, r: Long): Boolean = areas.any { area -> area.checkHit(x,y,r) }
+    override fun checkHit(x: Double, y: Double, r: Double) : Boolean= areas.any { area -> area.checkHit(x,y,r) }
 }

@@ -7,7 +7,7 @@ class Circle : Area {
         private const val R_DIVISION = 2
     }
 
-    override fun checkHit(x: Long, y: Long, r: Long): Boolean {
+    override fun checkHit(x: Double, y: Double, r: Double) : Boolean {
         val inFourthQuarter = (x >= 0) and (y <= 0)
         val inCircle = (x * x) + (y * y) <= (r / R_DIVISION) * (r / R_DIVISION)
         return inFourthQuarter and inCircle

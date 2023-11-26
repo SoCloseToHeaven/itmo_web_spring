@@ -1,5 +1,5 @@
 package ru.ifmo.soclosetoheaven.model
 
 interface Area {
-    fun checkHit(x: Long, y: Long, r: Long) : Boolean
+    fun checkHit(x: Double, y: Double, r: Double) : Boolean
 }

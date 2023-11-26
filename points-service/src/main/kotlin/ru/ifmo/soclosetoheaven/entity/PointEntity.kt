@@ -12,16 +12,14 @@ import java.util.Date
 @Entity(name = "points")
 @Table(name = "points")
 data class PointEntity(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    var id: Long? = null,
-
     @Column(name = "x")
-    var x: Long,
+    var x: Double,
 
     @Column(name = "y")
-    var y: Long,
+    var y: Double,
+
+    @Column(name = "processing_time")
+    var processingTime: Long,
 
     @Column(name = "created_at")
     var createdAt: Date,
@@ -29,4 +27,9 @@ data class PointEntity(
 
     @Column(name = "creator_id")
     var creatorId: Long
-)
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    var id: Long? = null
+}
