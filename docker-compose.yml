@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  eureka-server:
+    container_name: eureka-server
+    restart: always
+    build: ./eureka-server/
+    image: eureka-server
+    ports:
+      - "8081:8081"
+    networks:
+      - eureka-network
+
+  api-gateway:
+    container_name: api-gateway
+    restart: always
+    build: ./api-gateway/
+    image: api-gateway
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+    networks:
+      - eureka-network
+
+  points-service:
+    container_name: points-service
+    restart: always
+    build: ./points-service/
+    image: points-service
+    depends_on:
+      - eureka-server
+      - api-gateway
+    networks:
+      - eureka-network
+
+  auth-service:
+    container_name: auth-service
+    restart: always
+    build: ./auth-service/
+    image: auth-service
+    depends_on:
+      - eureka-server
+      - api-gateway
+    networks:
+      - eureka-network
+
+networks:
+  postgres:
+    driver: bridge
+  eureka-network:
+    driver: bridge
