@@ -10,6 +10,8 @@ services:
       - "8081:8081"
     networks:
       - eureka-network
+    environment:
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8081/eureka"
 
   api-gateway:
     container_name: api-gateway
@@ -22,6 +24,8 @@ services:
       - eureka-server
     networks:
       - eureka-network
+    environment:
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8081/eureka"
 
   points-service:
     container_name: points-service
@@ -35,6 +39,11 @@ services:
     networks:
       - eureka-network
       - postgres
+    environment:
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8081/eureka"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/db"
+      - "SPRING_DATASOURCE_USERNAME=admin"
+      - "SPRING_DATASOURCE_PASSWORD=root"
 
   auth-service:
     container_name: auth-service
@@ -48,6 +57,11 @@ services:
     networks:
       - eureka-network
       - postgres
+    environment:
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8081/eureka"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/db"
+      - "SPRING_DATASOURCE_USERNAME=admin"
+      - "SPRING_DATASOURCE_PASSWORD=root"
 
   postgres-db:
     image: postgres:15.5
