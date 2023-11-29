@@ -35,13 +35,13 @@ services:
     depends_on:
       - eureka-server
       - api-gateway
-      - postgres-db
+      - postgres-db-points
     networks:
       - eureka-network
       - postgres
     environment:
       - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8081/eureka"
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/db"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db-points:5433/points"
       - "SPRING_DATASOURCE_USERNAME=admin"
       - "SPRING_DATASOURCE_PASSWORD=root"
 
@@ -53,28 +53,43 @@ services:
     depends_on:
       - eureka-server
       - api-gateway
-      - postgres-db
+      - postgres-db-auth
     networks:
       - eureka-network
       - postgres
     environment:
       - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8081/eureka"
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/db"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db-auth:5432/auth"
       - "SPRING_DATASOURCE_USERNAME=admin"
       - "SPRING_DATASOURCE_PASSWORD=root"
 
-  postgres-db:
+  postgres-db-points:
     image: postgres:15.5
-    container_name: postgres-db
+    container_name: postgres-db-points
     restart: always
     ports:
       - "5433:5432"
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=db
+      - POSTGRES_DB=points
     volumes:
-      - postgres-db-data:/var/lib/postgresql/data
+      - postgres-db-points-data:/var/lib/postgresql/data
+    networks:
+      - postgres
+
+  postgres-db-auth:
+    image: postgres:15.5
+    container_name: postgres-db-auth
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=auth
+    volumes:
+      - postgres-db-auth-data:/var/lib/postgresql/data
     networks:
       - postgres
 
@@ -99,6 +114,7 @@ networks:
     driver: bridge
 
 volumes:
-  postgres-db-data:
+  postgres-db-points-data:
+  postgres-db-auth-data:
   pgadmin-data:
 
