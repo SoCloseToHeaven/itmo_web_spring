@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails
 
 @Entity(name = "users")
 @Table(name = "users")
-data class User(
+data class UserEntity(
 
     @Column(name = "username", unique = true)
     private val username: String,

@@ -9,7 +9,7 @@ import jakarta.annotation.PostConstruct
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import ru.ifmo.soclosetoheaven.entity.User
+import ru.ifmo.soclosetoheaven.entity.UserEntity
 import java.lang.Exception
 import java.util.*
 
@@ -56,10 +56,10 @@ class JWTUtils {
         }
     }
 
-    fun newToken(user: User) : String {
+    fun newToken(userEntity: UserEntity) : String {
         val claims = Jwts.claims()
-        claims.subject = user.username
-        claims.put("userId", user.id)
+        claims.subject = userEntity.username
+        claims.put("userId", userEntity.id)
         val expirationDate = Date(System.currentTimeMillis() + expires)
         return Jwts
             .builder()
