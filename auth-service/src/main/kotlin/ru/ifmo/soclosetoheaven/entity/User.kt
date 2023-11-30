@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails
 @Table(name = "users")
 data class User(
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private val username: String,
     @Column(name = "password")
     private val password: String,
