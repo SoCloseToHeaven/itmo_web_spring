@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.ifmo.soclosetoheaven.dto.AuthResponse
 import ru.ifmo.soclosetoheaven.dto.UserRequest
+import ru.ifmo.soclosetoheaven.dto.UserResponse
 import ru.ifmo.soclosetoheaven.entity.UserEntity
 import ru.ifmo.soclosetoheaven.exception.AuthException
 import ru.ifmo.soclosetoheaven.repository.UserRepository
@@ -31,12 +32,13 @@ class UserService {
     private lateinit var passwordEncoder: BCryptPasswordEncoder
 
     @Throws(UsernameNotFoundException::class)
-    fun getUserByName(name: String) = userMapper.mapToResponse(
-        userRepository.findByUsername(name) ?: throw UsernameNotFoundException("User with name '$name' was not found")
+    fun getUserByName(name: String): UserResponse = userMapper.mapToResponse(
+        userRepository.findByUsername(name)
+            ?: throw UsernameNotFoundException("User with name '$name' was not found")
     )
 
     @Throws(UsernameNotFoundException::class)
-    fun getUserById(id: Long) = userMapper.mapToResponse(
+    fun getUserById(id: Long): UserResponse = userMapper.mapToResponse(
         userRepository.findById(id).orElseThrow { UsernameNotFoundException("User with id '$id' was not found") }
     )
 

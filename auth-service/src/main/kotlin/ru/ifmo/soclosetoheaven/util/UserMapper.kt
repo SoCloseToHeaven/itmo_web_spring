@@ -14,12 +14,12 @@ class UserMapper {
     @Autowired
     private lateinit var passwordEncoder: BCryptPasswordEncoder
 
-    fun mapToResponse(userEntity: UserEntity) = UserResponse(
+    fun mapToResponse(userEntity: UserEntity): UserResponse = UserResponse(
         userEntity.id!!,
         userEntity.username
     )
 
-    fun mapFromRequest(userRequest: UserRequest) = UserEntity(
+    fun mapFromRequest(userRequest: UserRequest): UserEntity = UserEntity(
         userRequest.username,
         passwordEncoder.encode(userRequest.password)
     )
