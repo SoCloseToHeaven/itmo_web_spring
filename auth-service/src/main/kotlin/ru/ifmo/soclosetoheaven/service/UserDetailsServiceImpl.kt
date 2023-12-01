@@ -22,6 +22,7 @@ class UserDetailsServiceImpl : UserDetailsService {
         return User.builder()
             .username(user.username)
             .password(user.password)
+            .roles("USER") // default role
             .build()
     }
 
