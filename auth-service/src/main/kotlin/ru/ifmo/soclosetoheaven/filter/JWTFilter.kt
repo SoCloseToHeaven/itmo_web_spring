@@ -30,12 +30,16 @@ class JWTFilter : OncePerRequestFilter() {
                 throw JwtException("JWT token has expired")
             }
             val subject = claims.subject
+
+            req.setAttribute("username", subject)
+
             val auth = UsernamePasswordAuthenticationToken( // filling with username and unused
                 subject,
                 null,
                 mutableListOf()
             )
             SecurityContextHolder.getContext().authentication = auth
+            chain.doFilter(req, res)
         } catch (ex: Exception) {
             val error = ErrorResponse(
                 ex.message ?: "JWT Error"
@@ -44,6 +48,5 @@ class JWTFilter : OncePerRequestFilter() {
             res.contentType = MediaType.APPLICATION_JSON_VALUE
             objectMapper.writeValue(res.writer, error)
         }
-        chain.doFilter(req, res)
     }
 }
