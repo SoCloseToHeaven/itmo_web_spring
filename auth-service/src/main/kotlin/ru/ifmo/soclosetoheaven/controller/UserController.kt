@@ -16,6 +16,9 @@ class UserController {
     @Autowired
     private lateinit var userService: UserService
 
-    @GetMapping("/info")
+    @GetMapping("/me/info")
     fun getInfo(@RequestAttribute("username") username: String): UserResponse = userService.getUserByName(username)
+
+    @GetMapping("/me/id")
+    fun getId(@RequestAttribute("username") username: String): Long = userService.getUserByName(username).id
 }

@@ -28,7 +28,7 @@ class SecurityConfig {
         )
 
         private val AUTH_LIST = arrayOf(
-            "/user/info"
+            "/user/**"
         )
     }
 
