@@ -30,13 +30,14 @@ class UserService {
     @Autowired
     private lateinit var passwordEncoder: BCryptPasswordEncoder
 
-
+    @Throws(UsernameNotFoundException::class)
     fun getUserByName(name: String) = userMapper.mapToResponse(
-        userRepository.findByUsername(name) ?: throw UsernameNotFoundException("User with name=$name was not found")
+        userRepository.findByUsername(name) ?: throw UsernameNotFoundException("User with name '$name' was not found")
     )
 
+    @Throws(UsernameNotFoundException::class)
     fun getUserById(id: Long) = userMapper.mapToResponse(
-        userRepository.findById(id).orElseThrow { UsernameNotFoundException("User with id=$id was not found") }
+        userRepository.findById(id).orElseThrow { UsernameNotFoundException("User with id '$id' was not found") }
     )
 
 
@@ -48,13 +49,12 @@ class UserService {
     }
 
 
-    @Throws(AuthException::class)
+    @Throws(AuthException::class, UsernameNotFoundException::class)
     fun login(userRequest: UserRequest) : AuthResponse {
-        val userEntity = userRepository
-            .findByUsernameAndPassword(
-                userRequest.username,
-                passwordEncoder.encode(userRequest.password)
-            ) ?: throw AuthException("Invalid username or password")
+        val userEntity = userRepository.findByUsername(userRequest.username)
+            ?: throw UsernameNotFoundException("No user found with name '${userRequest.username}'")
+        if (!passwordEncoder.matches(userRequest.password, userEntity.password))
+            throw AuthException("Invalid password")
         val token = jwtUtils.newToken(userEntity)
         return AuthResponse(
             token,
@@ -63,12 +63,12 @@ class UserService {
     }
 
 
-    @Throws(AuthException::class)
+    @Throws(AuthException::class, UsernameNotFoundException::class)
     @Transactional
     fun signup(userRequest: UserRequest) : AuthResponse {
         val optionalUserEntity = userRepository.findByUsername(userRequest.username)
         if (optionalUserEntity != null)
-            throw AuthException("User with name=${userRequest.username} already exists")
+            throw AuthException("User with name '${userRequest.username}' already exists")
         val userEntity = createNewUser(userRequest)
         val token = jwtUtils.newToken(userEntity)
         return AuthResponse(

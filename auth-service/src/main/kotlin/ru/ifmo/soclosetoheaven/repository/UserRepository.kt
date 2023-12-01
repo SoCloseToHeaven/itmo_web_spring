@@ -8,8 +8,4 @@ import ru.ifmo.soclosetoheaven.entity.UserEntity
 interface UserRepository : JpaRepository<UserEntity, Long> {
     fun findByUsername(username: String): UserEntity?
 
-    fun findByUsernameAndPassword(username: String, password: String): UserEntity?
-
-
-
 }
