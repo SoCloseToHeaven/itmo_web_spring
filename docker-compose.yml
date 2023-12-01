@@ -41,7 +41,7 @@ services:
       - postgres
     environment:
       - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8081/eureka"
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db-points:5433/points"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db-points:5432/points"
       - "SPRING_DATASOURCE_USERNAME=admin"
       - "SPRING_DATASOURCE_PASSWORD=root"
 
