@@ -54,7 +54,7 @@ class UserService {
     @Throws(AuthException::class, UsernameNotFoundException::class)
     fun login(userRequest: UserRequest) : AuthResponse {
         val userEntity = userRepository.findByUsername(userRequest.username)
-            ?: throw UsernameNotFoundException("No user found with name '${userRequest.username}'")
+            ?: throw AuthException("No user found with name '${userRequest.username}'")
         if (!passwordEncoder.matches(userRequest.password, userEntity.password))
             throw AuthException("Invalid password")
         val token = jwtUtils.newToken(userEntity)
