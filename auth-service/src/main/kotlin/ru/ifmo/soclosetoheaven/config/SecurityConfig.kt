@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import ru.ifmo.soclosetoheaven.filter.JWTFilter
 import ru.ifmo.soclosetoheaven.service.UserDetailsServiceImpl
 import kotlin.jvm.Throws
 
@@ -29,6 +31,9 @@ class SecurityConfig {
     @Autowired
     private lateinit var userDetailsService: UserDetailsServiceImpl
 
+    @Autowired
+    private lateinit var jwtFilter: JWTFilter
+
 
     @Bean
     @Throws(Exception::class)
@@ -39,7 +44,7 @@ class SecurityConfig {
             req.requestMatchers("/**").authenticated()
         }
         .sessionManagement { strategy -> strategy.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-        // .addFilterBefore jwt authorization filter UsernamePasswordAuthenticationFilter::class.java
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
         .build()
 
 
