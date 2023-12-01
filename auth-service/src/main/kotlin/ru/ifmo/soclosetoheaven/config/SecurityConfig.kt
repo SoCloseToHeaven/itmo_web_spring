@@ -26,6 +26,10 @@ class SecurityConfig {
             "/auth/signup",
             "/health",
         )
+
+        private val AUTH_LIST = arrayOf(
+            "/user/info"
+        )
     }
 
     @Autowired
@@ -41,7 +45,8 @@ class SecurityConfig {
         .csrf { csrf -> csrf.disable() }
         .authorizeHttpRequests { req ->
             req.requestMatchers(*AUTH_WHITELIST).permitAll()
-            req.requestMatchers("/**").authenticated()
+            req.requestMatchers(*AUTH_LIST).authenticated()
+            req.requestMatchers("/**").denyAll()
         }
         .sessionManagement { strategy -> strategy.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
