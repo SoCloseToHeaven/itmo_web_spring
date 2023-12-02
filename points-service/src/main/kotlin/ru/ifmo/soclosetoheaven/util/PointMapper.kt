@@ -1,6 +1,5 @@
 package ru.ifmo.soclosetoheaven.util
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.ifmo.soclosetoheaven.dto.PointRequest
 import ru.ifmo.soclosetoheaven.dto.PointResponse
