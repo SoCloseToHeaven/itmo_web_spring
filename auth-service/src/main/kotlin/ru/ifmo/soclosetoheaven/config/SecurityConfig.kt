@@ -18,7 +18,10 @@ import kotlin.jvm.Throws
 
 @EnableWebSecurity
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val userDetailsService: UserDetailsServiceImpl,
+    private val jwtFilter: JWTFilter,
+) {
 
     companion object {
         private val AUTH_WHITELIST = arrayOf(
@@ -31,12 +34,6 @@ class SecurityConfig {
             "/user/**"
         )
     }
-
-    @Autowired
-    private lateinit var userDetailsService: UserDetailsServiceImpl
-
-    @Autowired
-    private lateinit var jwtFilter: JWTFilter
 
 
     @Bean

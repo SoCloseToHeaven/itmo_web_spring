@@ -12,10 +12,9 @@ import ru.ifmo.soclosetoheaven.service.UserService
 
 @RestController
 @RequestMapping("/auth")
-class AuthController {
-
-    @Autowired
-    private lateinit var userService: UserService
+class AuthController(
+    private val userService: UserService,
+) {
 
     @PostMapping(value = ["/login"])
     fun login(@RequestBody userRequest: UserRequest): AuthResponse = userService.login(userRequest)

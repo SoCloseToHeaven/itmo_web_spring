@@ -10,10 +10,9 @@ import ru.ifmo.soclosetoheaven.repository.UserRepository
 
 
 @Service
-class UserDetailsServiceImpl : UserDetailsService {
-
-    @Autowired
-    private lateinit var userRepository: UserRepository
+class UserDetailsServiceImpl(
+    private val userRepository: UserRepository
+) : UserDetailsService {
 
 
     override fun loadUserByUsername(username: String): UserDetails {

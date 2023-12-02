@@ -16,7 +16,7 @@ import ru.ifmo.soclosetoheaven.service.PointService
 @RequestMapping("/points")
 class PointsController(
     val pointService: PointService,
-    var jwtDTO: JwtDTO
+    var jwtDTO: JwtDTO,
 ) {
 
     @PostMapping

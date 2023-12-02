@@ -17,19 +17,12 @@ import kotlin.jvm.Throws
 
 
 @Service
-class UserService {
-
-    @Autowired
-    private lateinit var userMapper: UserMapper
-
-    @Autowired
-    private lateinit var userRepository: UserRepository
-
-    @Autowired
-    private lateinit var jwtUtils: JWTUtils
-
-    @Autowired
-    private lateinit var passwordEncoder: BCryptPasswordEncoder
+class UserService(
+    private val userMapper: UserMapper,
+    private val userRepository: UserRepository,
+    private val jwtUtils: JWTUtils,
+    private val passwordEncoder: BCryptPasswordEncoder
+) {
 
     @Throws(UsernameNotFoundException::class)
     fun getUserByName(name: String): UserResponse = userMapper.mapToResponse(

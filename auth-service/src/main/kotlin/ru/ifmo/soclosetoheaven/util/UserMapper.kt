@@ -9,10 +9,9 @@ import ru.ifmo.soclosetoheaven.entity.UserEntity
 
 
 @Component
-class UserMapper {
-
-    @Autowired
-    private lateinit var passwordEncoder: BCryptPasswordEncoder
+class UserMapper(
+    private val passwordEncoder: BCryptPasswordEncoder,
+) {
 
     fun mapToResponse(userEntity: UserEntity): UserResponse = UserResponse(
         userEntity.id!!,

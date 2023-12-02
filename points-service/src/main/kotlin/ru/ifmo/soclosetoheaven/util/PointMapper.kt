@@ -11,11 +11,9 @@ import java.util.*
 
 @Component
 
-class PointMapper {
-
-    @Autowired
-    private lateinit var hitChecker: HitChecker
-
+class PointMapper(
+    private val hitChecker: HitChecker,
+) {
     fun mapToEntity(point: PointRequest, creatorId: Long) : PointEntity {
         val startTime = System.nanoTime()
         return PointEntity(

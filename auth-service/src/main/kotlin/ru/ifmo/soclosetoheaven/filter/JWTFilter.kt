@@ -17,12 +17,10 @@ import ru.ifmo.soclosetoheaven.dto.ErrorResponse
 import ru.ifmo.soclosetoheaven.util.JWTUtils
 
 @Component
-class JWTFilter : OncePerRequestFilter() {
-
-    @Autowired
-    private lateinit var jwtUtils: JWTUtils
-    @Autowired
-    private lateinit var objectMapper: ObjectMapper
+class JWTFilter(
+    private val jwtUtils: JWTUtils,
+    private val objectMapper: ObjectMapper
+) : OncePerRequestFilter() {
     override fun doFilterInternal(req: HttpServletRequest, res: HttpServletResponse, chain: FilterChain) {
         if (jwtUtils.resolveToken(req) == null) {
             chain.doFilter(req, res)

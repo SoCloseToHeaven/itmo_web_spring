@@ -11,10 +11,9 @@ import ru.ifmo.soclosetoheaven.service.UserService
 
 @RestController
 @RequestMapping("/user")
-class UserController {
-
-    @Autowired
-    private lateinit var userService: UserService
+class UserController(
+    private val userService: UserService,
+) {
 
     @GetMapping("/me/info")
     fun getInfo(@RequestAttribute("username") username: String): UserResponse = userService.getUserByName(username)
