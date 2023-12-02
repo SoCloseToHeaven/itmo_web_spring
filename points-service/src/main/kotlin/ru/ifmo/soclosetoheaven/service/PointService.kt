@@ -1,13 +1,11 @@
 package ru.ifmo.soclosetoheaven.service
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.ifmo.soclosetoheaven.dto.PointRequest
 import ru.ifmo.soclosetoheaven.dto.PointResponse
 import ru.ifmo.soclosetoheaven.repository.PointRepository
 import ru.ifmo.soclosetoheaven.util.PointMapper
-import java.util.*
 
 
 @Service

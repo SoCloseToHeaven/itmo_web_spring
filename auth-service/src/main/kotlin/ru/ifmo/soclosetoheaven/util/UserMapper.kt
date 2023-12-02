@@ -1,6 +1,5 @@
 package ru.ifmo.soclosetoheaven.util
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
 import ru.ifmo.soclosetoheaven.dto.UserRequest
