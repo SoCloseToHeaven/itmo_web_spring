@@ -25,7 +25,7 @@ class PointService {
         .map { entity -> pointMapper.mapToResponse(entity, currentR) }
         .toList()
 
-    fun deleteAllUsersPoints(creatorId: Long) = pointRepository.deleteAllByCreatorId(creatorId)
+    fun deleteAllUserPoints(creatorId: Long) = pointRepository.deleteAllByCreatorId(creatorId)
 
 
 

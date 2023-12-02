@@ -31,7 +31,7 @@ class GatewayJWTFilter : GatewayFilter {
     override fun filter(exchange: ServerWebExchange, chain: GatewayFilterChain): Mono<Void> {
         val req = exchange.request
         val res = exchange.response
-        try {
+        return try {
             val header = req.headers.getFirst(HEADER) ?: throw JwtException("Unable to resolve token")
             if (!header.startsWith(STARTER))
                 throw JwtException("No bearer in header")
@@ -40,10 +40,11 @@ class GatewayJWTFilter : GatewayFilter {
             val exp = claims.expiration ?: throw JwtException("Expiration is null")
             if (exp.before(Date()))
                 throw JwtException("Token is expired")
-            return chain.filter(exchange)
+            chain.filter(exchange)
         } catch (ex: Exception) {
             res.statusCode = HttpStatus.FORBIDDEN
-            return res.setComplete()
+            ex.printStackTrace()
+            res.setComplete()
         }
     }
 
