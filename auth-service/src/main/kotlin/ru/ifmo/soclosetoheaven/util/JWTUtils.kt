@@ -23,17 +23,17 @@ class JWTUtils {
     }
 
 
-    lateinit var jwtParser: JwtParser
+    private lateinit var jwtParser: JwtParser
 
     @Value("\${jwt.secret}")
-    lateinit var secret: String
+    lateinit var secretKey: String
 
     @Value("\${jwt.expires}")
     private var expires: Long = 604800000 // Week in miliseconds
 
     @PostConstruct
     fun init() {
-        jwtParser = Jwts.parser().setSigningKey(secret)
+        jwtParser = Jwts.parser().setSigningKey(secretKey)
     }
 
     fun resolveToken(req: HttpServletRequest) : String? {
@@ -59,13 +59,13 @@ class JWTUtils {
     fun newToken(userEntity: UserEntity) : String {
         val claims = Jwts.claims()
         claims.subject = userEntity.username
-        claims.put("userId", userEntity.id)
+        claims["userId"] = userEntity.id
         val expirationDate = Date(System.currentTimeMillis() + expires)
         return Jwts
             .builder()
             .setClaims(claims)
             .setExpiration(expirationDate)
-            .signWith(SignatureAlgorithm.HS256, secret)
+            .signWith(SignatureAlgorithm.HS256, secretKey)
             .compact()
     }
 

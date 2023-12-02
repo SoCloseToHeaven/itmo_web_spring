@@ -24,6 +24,11 @@ class JWTFilter : OncePerRequestFilter() {
     @Autowired
     private lateinit var objectMapper: ObjectMapper
     override fun doFilterInternal(req: HttpServletRequest, res: HttpServletResponse, chain: FilterChain) {
+        if (jwtUtils.resolveToken(req) == null) {
+            chain.doFilter(req, res)
+            return
+        }
+
         try {
             val claims = jwtUtils.resolveClaims(req) ?: throw JwtException("Unable to resolve claims")
             if (!jwtUtils.validateClaims(claims)) {
