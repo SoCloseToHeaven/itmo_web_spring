@@ -1,6 +1,18 @@
 version: "3.9"
 
 services:
+  node_frontend:
+    container_name: node_frontend
+    restart: always
+    build: ./frontend/
+    image: node_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - eureka-server
+      - api-gateway
+      - points-service
+      - auth-service
   eureka-server:
     container_name: eureka-server
     restart: always
