@@ -38,6 +38,7 @@ class SecurityConfig(
     @Bean
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity) : SecurityFilterChain = http
+        .cors { cors -> cors.disable() }
         .csrf { csrf -> csrf.disable() }
         .authorizeHttpRequests { req ->
             req.requestMatchers(*AUTH_WHITELIST).permitAll()
