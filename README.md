@@ -1,6 +1,6 @@
 # Лабораторная работа #4
 ## Вариант: 666666
-![Task graph](/static/task_graph.png)
+![Task graph](/static/task_graph.PNG)
 
 **Требования от преподавателя практики**
 - Kotlin
