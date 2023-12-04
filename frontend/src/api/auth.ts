@@ -1,13 +1,11 @@
 import axios, {AxiosResponse} from "axios";
 import {create} from "zustand";
-
-const LOGIN_URI = "/auth/login"
-const SIGNUP_URI = "/auth/signup"
+import {LOGIN_URI, SIGNUP_URI} from "./constants";
 
 
 export interface User{
-    username: string,
-    password: string
+    username?: string,
+    password?: string
 }
 
 export interface UserInfo {
@@ -17,8 +15,8 @@ export interface UserInfo {
 
 
 export interface UserDetails {
-    token: string | undefined,
-    user: UserInfo | undefined
+    token?: string,
+    user?: UserInfo
 }
 
 export const useUserDetailsStore = create<UserDetails>((set) => ({
@@ -27,13 +25,14 @@ export const useUserDetailsStore = create<UserDetails>((set) => ({
 }));
 
 
-export function login(user: User, onSuccess: () => void, onFail: (message: String) => void) {
+export function login(user: User, onSuccess: () => void, onFail: (message: string) => void) {
     axios(LOGIN_URI, {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain',
             'Content-type': 'application/json',
-            withCredentials: true
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
         },
         data: JSON.stringify(user)
     }).then((res: AxiosResponse<UserDetails>) => {
@@ -47,13 +46,12 @@ export function login(user: User, onSuccess: () => void, onFail: (message: Strin
 
 
 // yes, actually this is copy-paste function because register request is basically a login request
-export function signup(user: User, onSuccess: () => void, onFail: (message: String) => void) {
+export function signup(user: User, onSuccess: () => void, onFail: (message: string) => void) {
     axios(SIGNUP_URI, {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain',
-            'Content-type': 'application/json',
-            withCredentials: true
+            'Content-type': 'application/json'
         },
         data: JSON.stringify(user)
     }).then((res: AxiosResponse<UserDetails>) => {

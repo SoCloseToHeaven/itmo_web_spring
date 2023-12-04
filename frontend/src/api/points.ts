@@ -1,7 +1,6 @@
 import {create} from "zustand";
 import axios, {AxiosResponse} from "axios";
-
-const POINT_URI = "/points"
+import {POINT_URI} from "./constants";
 
 export interface Point {
     x: number,
@@ -55,7 +54,7 @@ export function getAllPoints(currentR: number) {
 
 export function clearPoints() {
     axios(POINT_URI, { // TODO: add jwt token
-        method: "DELETE"
+        method: "DELETE",
     }).then((res) => {
         useProcessedPointStore.getState().clear();
     }).catch(err => console.log(err.message));
