@@ -71,3 +71,5 @@ export function logout(after: () => void) {
     }));
     after();
 }
+
+export const getJWT = () => `Bearer ${useUserDetailsStore.getState().token}`
