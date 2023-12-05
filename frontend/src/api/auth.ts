@@ -1,28 +1,8 @@
 import axios, {AxiosResponse} from "axios";
 import {create} from "zustand";
 import {LOGIN_URI, SIGNUP_URI} from "./constants";
-
-
-export interface User{
-    username?: string,
-    password?: string
-}
-
-export interface UserInfo {
-    id: number,
-    username: string
-}
-
-
-export interface UserDetails {
-    token?: string,
-    user?: UserInfo
-}
-
-export const useUserDetailsStore = create<UserDetails>((set) => ({
-    token: undefined,
-    user: undefined
-}));
+import {UserDetails, useUserDetailsStore} from "../data/user/store/UserDetails";
+import {User} from "../data/user/User";
 
 
 export function login(user: User, onSuccess: () => void, onFail: (message: string) => void) {
@@ -71,5 +51,3 @@ export function logout(after: () => void) {
     }));
     after();
 }
-
-export const getJWT = () => `Bearer ${useUserDetailsStore.getState().token}`
