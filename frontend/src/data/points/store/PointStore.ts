@@ -1,4 +1,4 @@
-import {create} from "zustand/esm";
+import {create} from "zustand";
 import {ProcessedPoint} from "../Points";
 
 export interface ProcessedPointStore {

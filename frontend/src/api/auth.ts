@@ -1,5 +1,4 @@
 import axios, {AxiosResponse} from "axios";
-import {create} from "zustand";
 import {LOGIN_URI, SIGNUP_URI} from "./constants";
 import {UserDetails, useUserDetailsStore} from "../data/user/store/UserDetails";
 import {User} from "../data/user/User";

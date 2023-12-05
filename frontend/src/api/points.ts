@@ -1,4 +1,3 @@
-import {create} from "zustand";
 import axios, {AxiosResponse} from "axios";
 import {POINT_URI} from "./constants";
 import {bearerToken} from "../data/user/store/UserDetails";
