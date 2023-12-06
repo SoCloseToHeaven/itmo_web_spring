@@ -3,6 +3,7 @@ import {Graph} from "./components/Graph";
 import {useNavigate} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {logout} from "../../api/auth";
+import PointsForm from "./components/PointsForm";
 
 
 export default function PointsPage() {
@@ -20,6 +21,9 @@ export default function PointsPage() {
             </div>
             <div>
                 <Graph />
+            </div>
+            <div>
+                <PointsForm />
             </div>
         </div>
     );
