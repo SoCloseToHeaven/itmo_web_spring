@@ -8,7 +8,7 @@ interface AuthorizationFormProps {
 }
 export default function AuthorizationForm(
     { onSuccess, onFail } : AuthorizationFormProps
-) {
+){
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");

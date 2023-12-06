@@ -47,7 +47,7 @@ export const Graph : React.FC = () => {
     };
 
     return (
-        <canvas className="map-img"
+        <canvas
                 width={width}
                 height={height}
                 id="canvas"
@@ -55,8 +55,6 @@ export const Graph : React.FC = () => {
                 onPointerLeave={(e) => fillGraphCtx()}
                 onPointerMove={(event) => drawPointer(event)}
         >
-            Canvas is not supported in your browser!
-            <img className="map-img" width={width} height={height} />
         </canvas>
     );
 }
