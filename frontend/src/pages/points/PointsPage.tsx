@@ -5,11 +5,15 @@ import {Button} from "react-bootstrap";
 import {logout} from "../../api/auth";
 import PointsForm from "./components/PointsForm";
 import ResultsTable from "./components/ResultsTable";
+import {getAllPoints} from "../../api/points";
+import {useRadiusStore} from "../../data/points/store/RadiusStore";
 
 
 export default function PointsPage() {
     const navigate = useNavigate();
     const afterLogout = () => navigate("/auth");
+
+    getAllPoints(useRadiusStore.getState().radius);
 
     return (
         <div>
