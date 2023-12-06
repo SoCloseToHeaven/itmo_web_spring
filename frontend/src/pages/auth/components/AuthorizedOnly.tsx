@@ -1,5 +1,5 @@
 import React from "react";
-import {useUserDetailsStore} from "../data/user/store/UserDetails";
+import {useUserDetailsStore} from "../../../data/user/store/UserDetails";
 import {useNavigate} from "react-router-dom";
 
 export interface AuthorizedOnlyProps {

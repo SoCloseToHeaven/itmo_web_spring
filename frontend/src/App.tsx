@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import AuthorizationPage from "./pages/auth/AuthorizationPage";
 import PointsPage from "./pages/points/PointsPage";
-import AuthorizedOnly from "./components/AuthorizedOnly";
+import AuthorizedOnly from "./pages/auth/components/AuthorizedOnly";
 
 function App() {
 
