@@ -15,7 +15,9 @@ export function sendPoint(point: Point) {
         data: JSON.stringify(point)
     }).then((res: AxiosResponse<ProcessedPoint>) => {
         const point = res.data;
-        useProcessedPointStore.getState().add(point);
+        useProcessedPointStore.setState(state => ({
+            points: [...state.points, point]
+        }));
     }).catch(err => console.log(err.message));
 }
 
@@ -27,7 +29,9 @@ export function getAllPoints(currentR: number) {
             Authorization: bearerToken()
         }
     }).then((res: AxiosResponse<Array<ProcessedPoint>>) => {
-        useProcessedPointStore.getState().points = res.data;
+        useProcessedPointStore.setState((state) => ({
+           points: [...res.data]
+        }));
     }).catch(err => console.log(err.message));
 }
 
@@ -38,6 +42,8 @@ export function clearPoints() {
             Authorization: bearerToken()
         }
     }).then((res) => {
-        useProcessedPointStore.getState().clear();
+        useProcessedPointStore.setState(state => ({
+            points: []
+        }));
     }).catch(err => console.log(err.message));
 }
