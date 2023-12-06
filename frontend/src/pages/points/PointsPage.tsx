@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {logout} from "../../api/auth";
 import PointsForm from "./components/PointsForm";
+import ResultsTable from "./components/ResultsTable";
 
 
 export default function PointsPage() {
@@ -24,6 +25,9 @@ export default function PointsPage() {
             </div>
             <div>
                 <PointsForm />
+            </div>
+            <div>
+                <ResultsTable />
             </div>
         </div>
     );
