@@ -27,7 +27,7 @@ export default function ResultsTable() {
                             <td>{point.y}</td>
                             <td>{point.r}</td>
                             <td>{point.hit ? 'HIT' : 'Miss'}</td>
-                            <td>{point.createdAt}</td>
+                            <td>{new Date(point.createdAt).toString()}</td>
                             <td>{point.processingTime}</td>
                         </tr>
                     );

@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import {useProcessedPointStore} from "../../../data/points/store/PointStore";
 import {useRadiusStore} from "../../../data/points/store/RadiusStore";
+import {ProcessedPoint} from "../../../data/points/Points";
 
 const width  = 600;
 const height = 600;
@@ -21,7 +22,7 @@ export const Graph : React.FC = () => {
 
     const fillGraphCtx = () => {
         if (ctx) {
-            fillGraph(ctx);
+            fillGraph(ctx, points, radius);
             return ctx;
         }
     };
@@ -62,7 +63,7 @@ export const Graph : React.FC = () => {
     );
 }
 
-function fillGraph(ctx: CanvasRenderingContext2D) {
+function fillGraph(ctx: CanvasRenderingContext2D, points?: ProcessedPoint[], radius?: number) {
     ctx.save();
     ctx.font = "13px sans-serif";
     ctx.fillStyle = 'white';
@@ -128,9 +129,6 @@ function fillGraph(ctx: CanvasRenderingContext2D) {
     ctx.lineTo(width / 2 - 5, 5);
     ctx.lineTo(width / 2, 0);
     ctx.stroke();
-
-    const radius = useRadiusStore.getState().radius;
-    const points = useProcessedPointStore.getState().points;
 
     if (!points || !radius) {
         return;
