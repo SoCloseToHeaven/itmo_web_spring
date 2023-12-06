@@ -13,6 +13,9 @@ const labels : string[] = ["-R", "-R/2", "0", "R/2", "R"];
 
 
 export const Graph : React.FC = () => {
+    const points = useProcessedPointStore(state => state.points);
+    const radius = useRadiusStore(state => state.radius);
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const ctx = canvasRef.current?.getContext("2d");
 
@@ -25,7 +28,7 @@ export const Graph : React.FC = () => {
 
     useEffect(() => {
         fillGraphCtx();
-    }, [useRadiusStore, useProcessedPointStore]);
+    }, [points, radius]);
 
     const drawPointer = (event: React.PointerEvent<HTMLCanvasElement>) => {
         const rect = canvasRef.current?.getBoundingClientRect();
