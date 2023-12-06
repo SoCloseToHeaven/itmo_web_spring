@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from "react";
 import {useProcessedPointStore} from "../../../data/points/store/PointStore";
 import {useRadiusStore} from "../../../data/points/store/RadiusStore";
 import {ProcessedPoint} from "../../../data/points/Points";
+import {sendPoint} from "../../../api/points";
 
 const width  = 600;
 const height = 600;
@@ -58,6 +59,21 @@ export const Graph : React.FC = () => {
                 ref={canvasRef}
                 onPointerLeave={(e) => fillGraphCtx()}
                 onPointerMove={(event) => drawPointer(event)}
+                onPointerDown={(e) => {
+                    const offsetX = e.nativeEvent.offsetX;
+                    const offsetY = e.nativeEvent.offsetY;
+
+                    let x = (2 * offsetX / width - 1) *  1.5 * radius;
+                    let y = (2 * offsetY / height - 1) * -1.5 * radius;
+                    x = Math.round(x * 100) / 100;
+                    y = Math.round(y * 100) / 100;
+
+                    sendPoint({
+                        x: x,
+                        y: y,
+                        r: radius
+                    });
+                }}
         >
         </canvas>
     );
