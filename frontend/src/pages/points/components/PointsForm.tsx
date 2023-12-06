@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Form from 'react-bootstrap/Form';
 import {Button, FormCheck} from "react-bootstrap";
 import {useRadiusStore} from "../../../data/points/store/RadiusStore";
-import {clearPoints, sendPoint} from "../../../api/points";
+import {clearPoints, getAllPoints, sendPoint} from "../../../api/points";
 
 const X_VALUES = [-3, -2, -1, 0, 1, 2, 3, 4, 5];
 const Y_VALUES = [-3, -2, -1, 0, 1, 2, 3, 4, 5];
@@ -16,6 +16,7 @@ export default function PointsForm() {
     const [y, setY] = useState<number>(0);
 
 
+    useEffect(() => getAllPoints(radius), [radius]);
 
     return (
         <Form

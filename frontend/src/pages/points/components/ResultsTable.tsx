@@ -13,7 +13,7 @@ export default function ResultsTable() {
                     <th>X</th>
                     <th>Y</th>
                     <th>R</th>
-                    <th>hit</th>
+                    <th>Hit/Miss</th>
                     <th>Creation date</th>
                     <th>Processing time (ns)</th>
                 </tr>
@@ -26,7 +26,7 @@ export default function ResultsTable() {
                             <td>{point.x}</td>
                             <td>{point.y}</td>
                             <td>{point.r}</td>
-                            <td>{point.hit}</td>
+                            <td>{point.hit ? 'HIT' : 'Miss'}</td>
                             <td>{point.createdAt}</td>
                             <td>{point.processingTime}</td>
                         </tr>
