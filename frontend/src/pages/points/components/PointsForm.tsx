@@ -20,7 +20,7 @@ export default function PointsForm() {
 
     return (
         <Form
-            className="container"
+            className="container text-center"
             onSubmit={event => {
                     event.preventDefault();
                     const pointAttempt = {
@@ -32,7 +32,9 @@ export default function PointsForm() {
                 }
             }
         >
+            <Form.Label className="fs-2 fw-bold">Enter point data</Form.Label>
             <Form.Group id="x-group">
+                <Form.Label className="fs-3">Choose X value</Form.Label>
                 <div className={"row justify-content-center"}>
                     {
                         X_VALUES.map((value) => {
@@ -58,8 +60,9 @@ export default function PointsForm() {
             </Form.Group>
             <Form.Group
                 id="y-group"
-                className="w-75"
+                className="w-100"
             >
+                <Form.Label className="fs-3">Select Y value</Form.Label>
                 <Form.Select
                     onChange={(e) => setY(parseFloat(e.target.value))}
                 >
@@ -79,6 +82,7 @@ export default function PointsForm() {
             <Form.Group
                 id="r-group"
             >
+                <Form.Label className="fs-3">Choose R value</Form.Label>
                 <div className={"row justify-content-center"}>
                     {
                         R_VALUES.map((value) => {
@@ -101,12 +105,18 @@ export default function PointsForm() {
                     }
                 </div>
             </Form.Group>
-            <Form.Group id="submit-clear-group">
-                <Button type="submit">
+            <Form.Group
+                id="submit-clear-group"
+            >
+                <Button
+                    type="submit"
+                    className="m-3 btn btn-primary btn-lg"
+                >
                     Submit
                 </Button>
                 <Button
                     type="button"
+                    className="m-3 btn btn-primary btn-lg"
                     onClick={() => clearPoints()}
                 >
                     Clear

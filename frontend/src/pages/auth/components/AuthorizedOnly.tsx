@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useUserDetailsStore} from "../../../data/user/store/UserDetails";
 import {useNavigate} from "react-router-dom";
 
@@ -9,13 +9,12 @@ export interface AuthorizedOnlyProps {
 export default function AuthorizedOnly({ child } : AuthorizedOnlyProps) {
     const navigate = useNavigate();
 
-    const authState = useUserDetailsStore.getState();
+    const authState = useUserDetailsStore(state => state);
     const isAuthorized = (authState.user !== undefined) && (authState.token !== undefined);
 
     if (!isAuthorized) {
         navigate("/auth");
     }
-
 
     return (
         <>

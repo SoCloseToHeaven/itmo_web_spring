@@ -24,14 +24,14 @@ export default function PointsPage() {
                     Logout
                 </Button>
             </div>
-            <div>
+            <div className="container border border-primary rounded text-center shadow-lg ">
                 <Graph />
             </div>
-            <div>
+            <div className="gap-3 container border border-secondary rounded text-center w-50 p-3 mt-5 shadow-lg">
                 <PointsForm />
             </div>
-            <div>
-                <ResultsTable />
+            <div className="container mt-3 mb-3 shadow-lg">
+                    <ResultsTable />
             </div>
         </div>
     );

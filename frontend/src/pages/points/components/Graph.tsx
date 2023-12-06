@@ -53,6 +53,7 @@ export const Graph : React.FC = () => {
 
     return (
         <canvas
+                className="border border-secondary shadow-lg  rounded mt-5 mb-5"
                 width={width}
                 height={height}
                 id="canvas"
