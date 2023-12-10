@@ -4,11 +4,15 @@ import {UserInfo} from "../User";
 export interface UserDetails {
     token?: string,
     user?: UserInfo
+    isAuthorized: () => boolean
 }
 
 export const useUserDetailsStore = create<UserDetails>((set) => ({
     token: undefined,
-    user: undefined
+    user: undefined,
+    isAuthorized: function () {
+        return (this.user !== undefined) && (this.token !== undefined);
+    }
 }));
 
 

@@ -1,17 +1,22 @@
 import React from "react";
 import {Graph} from "./components/Graph";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {logout} from "../../api/auth";
 import PointsForm from "./components/PointsForm";
 import ResultsTable from "./components/ResultsTable";
 import {getAllPoints} from "../../api/points";
 import {useRadiusStore} from "../../data/points/store/RadiusStore";
+import {useUserDetailsStore} from "../../data/user/store/UserDetails";
 
 
 export default function PointsPage() {
     const navigate = useNavigate();
     const afterLogout = () => navigate("/auth");
+
+    if (!useUserDetailsStore.getState().isAuthorized()) {
+        return <Navigate to={"/auth"} replace />
+    }
 
     getAllPoints(useRadiusStore.getState().radius);
 

@@ -9,7 +9,7 @@ export default function AuthorizationPage() {
     const [failText, setFailText] = useState<string>("");
 
     const navigate = useNavigate();
-    const onSuccess = () => navigate("/points");
+    const onSuccess = () => navigate("/");
 
     const onFail = (message: string) => setFailText(message);
 
