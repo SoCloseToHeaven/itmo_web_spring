@@ -25,10 +25,9 @@ export default function AuthorizationPage() {
                 <AuthorizationForm onSuccess={onSuccess} onFail={onFail} />
             </div>
             <div
-                className="text-center w-25"
+                className="text-center container mt-3 mb-3"
             >
                 <Alert
-
                     variant="danger"
                     key="danger"
                     hidden={failText.length === 0}
