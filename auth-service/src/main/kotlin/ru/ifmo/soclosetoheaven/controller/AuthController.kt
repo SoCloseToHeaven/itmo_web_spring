@@ -1,5 +1,6 @@
 package ru.ifmo.soclosetoheaven.controller
 
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,8 +17,8 @@ class AuthController(
 ) {
 
     @PostMapping(value = ["/login"])
-    fun login(@RequestBody userRequest: UserRequest): AuthResponse = userService.login(userRequest)
+    fun login(@Valid @RequestBody userRequest: UserRequest): AuthResponse = userService.login(userRequest)
 
     @PostMapping(value = ["/signup"])
-    fun signup(@RequestBody userRequest: UserRequest): AuthResponse = userService.signup(userRequest)
+    fun signup(@Valid @RequestBody userRequest: UserRequest): AuthResponse = userService.signup(userRequest)
 }
