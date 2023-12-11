@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import AuthorizationPage from "./pages/auth/AuthorizationPage";
 import PointsPage from "./pages/points/PointsPage";
-import AuthorizedRoute from "./pages/auth/components/AuthorizedRoute";
 
 const HOME_PAGE = "/"
 const AUTH_PAGE = "/auth"
